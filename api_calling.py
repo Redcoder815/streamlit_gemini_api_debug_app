@@ -14,10 +14,20 @@ api_key = os.getenv("GOOGLE_GEMINI_KEY")
 client = genai.Client(api_key = api_key)
 
 def debug_error(images, debug_option):
+    # if debug_option == "Hints":
+    #     prompt = f"Generate debug with hints and solutions. Give me response exactly like this: Error:[description] || Solution:[description]"
+    # else:
+    #     prompt = f"Generate debug with code and solutions. Give me response exactly like this: Error:[description] || Solution:[description]"
+
+    # if debug_option == "Hints":
+    #     prompt = f"Generate debug with hints and solutions"
+    # else:
+    #     prompt = f"Generate debug with code and solutions"
+
     if debug_option == "Hints":
-        prompt = f"Generate debug with hints and solutions"
+        prompt = f"Analyze the error. Provide a description and a hint for the solution with Error header. Give Error header in error analyze and Solution header in hint for solution and show both of them in different blocks"
     else:
-        prompt = f"Generate debug with code and solutions"
+        prompt = f"Analyze the error. Provide a description and the corrected code block with Solution header. Give Error header in error analyze and Solution header in code block for solution and show both of them in different blocks"
 
     response = client.models.generate_content(
         model = "gemini-3-flash-preview",
